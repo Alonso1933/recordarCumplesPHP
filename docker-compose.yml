@@ -9,6 +9,8 @@ services:
       - mi_red_docker
     depends_on:
       - db_mysql
+    volumes:
+      - mi_volumen_app:/var/www/html
 
   db_mysql:
     image: mysql
