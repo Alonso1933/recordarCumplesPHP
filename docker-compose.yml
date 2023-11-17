@@ -21,6 +21,8 @@ services:
       - MYSQL_ROOT_PASSWORD=notSecureChangeMe
     networks:
       - mi_red_docker
+    volumes:
+      - mi_volumen_mysql:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin
@@ -31,6 +33,15 @@ services:
       - PMA_ARBITRARY=1
     networks:
       - mi_red_docker
+
+volumes:
+  mi_volumen_app:
+  mi_volumen_mysql:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: C:/appPHP_docker/mysql/data
 
 networks:
   mi_red_docker:
