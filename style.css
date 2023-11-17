@@ -1,0 +1,30 @@
+h1 {
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: lightgrey;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+    width: auto; /* Establece el ancho automático para las celdas */
+}
+
+button {
+    text-align: center;
+}
+
+button img {
+    width: 35px;
+    height: 35px;
+    display: block; /* Hace que la imagen sea un bloque para poder centrarla */
+    margin: 0 auto; /* Margen automático a los lados para centrar horizontalmente */
+}

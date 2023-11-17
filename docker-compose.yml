@@ -1,0 +1,34 @@
+version: '3.1'
+
+services:
+  cumple_amigos:
+    build: .
+    ports:
+      - 4444:80
+    networks:
+      - mi_red_docker
+    depends_on:
+      - db_mysql
+
+  db_mysql:
+    image: mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=notSecureChangeMe
+    networks:
+      - mi_red_docker
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 3333:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - mi_red_docker
+
+networks:
+  mi_red_docker:
