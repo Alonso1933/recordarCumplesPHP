@@ -1,0 +1,53 @@
+version: '3.1'
+
+services:
+  cumple_amigos:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - 4444:80
+    networks:
+      - mi_red_docker
+    depends_on:
+      - db_mysql
+    volumes:
+      - mi_volumen_app:/var/www/html
+      - .:/var/www/html  # Monta el código desde tu PC al contenedor
+    environment:
+      - XDEBUG_MODE=develop,debug
+      - PHP_IDE_CONFIG=serverName=cumple_amigos
+
+  db_mysql:
+    image: mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=notSecureChangeMe
+    networks:
+      - mi_red_docker
+    volumes:
+      - mi_volumen_mysql:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 3333:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - mi_red_docker
+
+volumes:
+  mi_volumen_app:
+  mi_volumen_mysql:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: C:/appPHP_docker/mysql/data
+
+networks:
+  mi_red_docker:

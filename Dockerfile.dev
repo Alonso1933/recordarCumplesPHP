@@ -1,0 +1,21 @@
+# Utiliza la imagen oficial de PHP como base para desarrollo
+FROM php:8.1.12-apache
+
+# Instala las herramientas necesarias para desarrollo
+RUN apt-get update && \
+    apt-get install -y \
+    libpq-dev \
+    libzip-dev \
+    unzip \
+    && docker-php-ext-install pdo_mysql \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+# Puerto en el que escuchará Apache
+EXPOSE 8080
+
+# Configuración para evitar el mensaje de advertencia
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
+# Comando para iniciar Apache en primer plano
+CMD ["apache2-foreground"]
